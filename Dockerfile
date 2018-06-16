@@ -17,3 +17,7 @@ ENV PATH=${JAVA_HOME}/bin:${PATH}
 RUN ["mkdir", ".m2"]
 ADD ["./files/m2/settings.xml", "./.m2"]
 ADD ["./files/m2/settings-security.xml", "./.m2"]
+
+# Maven cache - mounted so that maven runs between steps do not need to download dependcies again
+RUN ["mkdir", "./.m2/repository"]
+VOLUME ["/root/.m2/repository"]
