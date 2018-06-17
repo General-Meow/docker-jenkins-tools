@@ -5,7 +5,7 @@ FROM ubuntu:18.04
 MAINTAINER Paul Hoang 2018-06-05
 RUN ["apt", "update"]
 RUN ["apt", "upgrade", "-y"]
-RUN ["apt", "install", "gradle", "git", "maven", "-y"]
+RUN ["apt", "install", "gradle", "git", "maven", "docker.io", "-y"]
 WORKDIR /root
 
 ADD ["./files/jdk-8u171-linux-arm32-vfp-hflt.tar.gz", "/root"]
