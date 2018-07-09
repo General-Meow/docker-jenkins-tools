@@ -11,6 +11,7 @@ RUN ["apt", "install", "curl", "gnupg", "-y"]
 RUN sh -c 'curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -'
 RUN sh -c 'echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list'
 
+RUN ["apt", "update"]
 RUN ["apt", "upgrade", "-y"]
 RUN ["apt", "install", "gradle", "git", "maven", "docker.io", "kubeadm", "-y"]
 
