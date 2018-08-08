@@ -1,7 +1,7 @@
 # build: docker build -t generalmeow/jenkins-tools:<TAG> .
 # notes: This image is used for the jenkins pipeline. it contains the tools required to run
 # pipeline builds etc
-FROM ubuntu:18.04
+FROM ubuntu:17.10
 MAINTAINER Paul Hoang 2018-08-02
 
 #add k8
