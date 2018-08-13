@@ -5,21 +5,6 @@
     <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
   </pluginGroups>
   <servers>
-    <!-- HOME Artifactory server-->
-    <!--
-    <server>
-      <username>admin</username>
-      <password>{2Gb/m2veivgH7UV4djiyrlVRl+tmyPZ10n66O5unx17J50JkTt7SoU2th5YZPidQF8B8VhusWXzu9j5UKpkHqatnrj7OA54c380+M3qGgAgDf2kl5K65LmEJ8DjO30CxU/rtu4cdaZS3NsioY+CEj0O3ocg8EdWCSS0M1+K9wws=}</password>
-      <id>central</id>
-    </server>
-    <server>
-      <username>admin</username>
-      <password>{2Gb/m2veivgH7UV4djiyrlVRl+tmyPZ10n66O5unx17J50JkTt7SoU2th5YZPidQF8B8VhusWXzu9j5UKpkHqatnrj7OA54c380+M3qGgAgDf2kl5K65LmEJ8DjO30CxU/rtu4cdaZS3NsioY+CEj0O3ocg8EdWCSS0M1+K9wws=}</password>
-      <id>snapshots</id>
-    </server>
-    -->
-    <!-- HOME Artifactory server end-->
-
     <!-- HOME Nexus server -->
     <server>
       <id>nexus</id>
@@ -27,48 +12,16 @@
       <password>{AMHD408I88oHtHSHtc08TElc9WE3jBOgcUwpQ2HzeOc=}</password>
     </server>
     <!-- HOME Nexus server end -->
-
   </servers>
+  <mirrors>
+    <mirror>
+      <!--This sends everything else to /public with the exception of the spring ones-->
+      <id>nexus</id>
+      <mirrorOf>*,!spring-snapshots,!spring-milestones</mirrorOf>
+      <url>http://tinker.paulhoang.com:8081/repository/maven-public/</url>
+    </mirror>
+  </mirrors>
   <profiles>
-    <!-- HOME Artifactory repos-->
-    <!--
-    <profile>
-      <repositories>
-        <repository>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <id>central</id>
-          <name>libs-release</name>
-          <url>http://tinker.paulhoang.com:8081/artifactory/libs-release</url>
-        </repository>
-        <repository>
-          <snapshots />
-          <id>snapshots</id>
-          <name>libs-snapshot</name>
-          <url>http://tinker.paulhoang.com:8081/artifactory/libs-snapshot</url>
-        </repository>
-      </repositories>
-      <pluginRepositories>
-        <pluginRepository>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <id>central</id>
-          <name>libs-release</name>
-          <url>http://tinker.paulhoang.com:8081/artifactory/libs-release</url>
-        </pluginRepository>
-        <pluginRepository>
-          <snapshots />
-          <id>snapshots</id>
-          <name>libs-release</name>
-          <url>http://tinker.paulhoang.com:8081/artifactory/libs-release</url>
-        </pluginRepository>
-      </pluginRepositories>
-      <id>artifactory</id>
-    </profile>
-    -->
-
     <!-- profile to route things from the mirror to these profiles -->
     <profile>
       <id>nexus</id>
@@ -87,8 +40,20 @@
           <releases><enabled>false</enabled></releases>
           <snapshots><enabled>true</enabled></snapshots>
         </repository>
-      </repositories>
-      <pluginRepositories>
+        <!-- custom repositories that are defined in some pom.xml that are not affiliated with central maven repo should also be defined  -->
+        <repository>
+                <id>spring-snapshots</id>
+                <name>Spring Snapshots</name>
+                <url>https://repo.spring.io/snapshot</url>
+        </repository>
+        <repository>
+                <id>spring-milestones</id>
+                <name>Spring Milestones</name>
+                <url>https://repo.spring.io/milestone</url>
+        </repository>
+
+   </repositories>
+   <pluginRepositories>
         <pluginRepository>
           <id>central</id>
           <url>http://tinker.paulhoang.com:8081/repository/maven-releases/</url>
